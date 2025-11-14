@@ -1,7 +1,6 @@
 services:
   broker-1:
     image: apache/kafka:latest
-    container_name: broker-1
     ports:
       - "19092:9092"
     environment:
@@ -15,11 +14,10 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
     volumes:
-      - kafka-data1:/tmp/kafka-logs
+      - data1:/tmp/kafka-logs
 
   broker-2:
     image: apache/kafka:latest
-    container_name: broker-2
     ports:
       - "29092:9092"
     environment:
@@ -33,11 +31,10 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
     volumes:
-      - kafka-data2:/tmp/kafka-logs
+      - data2:/tmp/kafka-logs
 
   broker-3:
     image: apache/kafka:latest
-    container_name: broker-3
     ports:
       - "39092:9092"
     environment:
@@ -51,7 +48,7 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
     volumes:
-      - kafka-data3:/tmp/kafka-logs
+      - data3:/tmp/kafka-logs
 
   kafka-ui:
     image: ghcr.io/kafbat/kafka-ui
@@ -65,3 +62,8 @@ services:
       - broker-1
       - broker-2
       - broker-3
+
+volumes:
+  data1:
+  data2:
+  data3:
