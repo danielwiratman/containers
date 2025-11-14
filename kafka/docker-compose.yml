@@ -13,8 +13,11 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
     volumes:
-      - data1:/tmp/kafka-logs
+      - ./data/broker-1/data:/var/lib/kafka/data
+      - ./data/broker-1/metadata:/var/lib/kafka/metadata
 
   broker-2:
     image: apache/kafka:latest
@@ -30,8 +33,11 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
     volumes:
-      - data2:/tmp/kafka-logs
+      - ./data/broker-2/data:/var/lib/kafka/data
+      - ./data/broker-2/metadata:/var/lib/kafka/metadata
 
   broker-3:
     image: apache/kafka:latest
@@ -47,8 +53,11 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
     volumes:
-      - data3:/tmp/kafka-logs
+      - ./data/broker-3/data:/var/lib/kafka/data
+      - ./data/broker-3/metadata:/var/lib/kafka/metadata
 
   kafka-ui:
     image: ghcr.io/kafbat/kafka-ui
@@ -62,8 +71,3 @@ services:
       - broker-1
       - broker-2
       - broker-3
-
-volumes:
-  data1:
-  data2:
-  data3:
